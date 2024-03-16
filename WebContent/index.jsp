@@ -1,3 +1,5 @@
+<%@ page import="java.util.List" %>
+<%@ page import="com.se4f7.prj301.entities.User" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
   <!DOCTYPE html>
   <html>
@@ -9,6 +11,9 @@
     <link href="./css/mdb.min.css" rel="stylesheet">
     <link href="./css/login-style.css" rel="stylesheet">
   </head>
+  <%
+      List<User> list = (List<User>) request.getAttribute("list");
+  %>
 
   <body>
     <table class="table align-middle mb-0 bg-white">
@@ -22,27 +27,30 @@
     </tr>
   </thead>
   <tbody>
+  <%for(User user : list){%>
     <tr>
       <td>
         <div class="d-flex align-items-center">
+          <a href="./profile?id=<%= user.getId() %>">
+
           <img
               src="https://mdbootstrap.com/img/new/avatars/8.jpg"
               alt=""
               style="width: 45px; height: 45px"
               class="rounded-circle"
               />
+            </a>
           <div class="ms-3">
-            <p class="fw-bold mb-1">John Doe</p>
-            <p class="text-muted mb-0">john.doe@gmail.com</p>
+            <p class="fw-bold mb-1"><%=user.getFirstName()%> <%=user.getLastName()%></p>
+            <p class="text-muted mb-0"><%=user.getEmail()%></p>
           </div>
         </div>
       </td>
       <td>
-        <p class="fw-normal mb-1">Software engineer</p>
-        <p class="text-muted mb-0">IT department</p>
+        <p class="fw-normal mb-1"><%=user.getTitle()%></p>
       </td>
       <td>
-        <span class="badge badge-success rounded-pill d-inline">Active</span>
+        <span class="badge badge-success rounded-pill d-inline"><%=user.getStatus()%></span>
       </td>
       <td>Senior</td>
       <td>
@@ -51,74 +59,7 @@
         </button>
       </td>
     </tr>
-    <tr>
-      <td>
-        <div class="d-flex align-items-center">
-          <img
-              src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-              class="rounded-circle"
-              alt=""
-              style="width: 45px; height: 45px"
-              />
-          <div class="ms-3">
-            <p class="fw-bold mb-1">Alex Ray</p>
-            <p class="text-muted mb-0">alex.ray@gmail.com</p>
-          </div>
-        </div>
-      </td>
-      <td>
-        <p class="fw-normal mb-1">Consultant</p>
-        <p class="text-muted mb-0">Finance</p>
-      </td>
-      <td>
-        <span class="badge badge-primary rounded-pill d-inline"
-              >Onboarding</span
-          >
-      </td>
-      <td>Junior</td>
-      <td>
-        <button
-                type="button"
-                class="btn btn-link btn-rounded btn-sm fw-bold"
-                data-mdb-ripple-color="dark"
-                >
-          Edit
-        </button>
-      </td>
-    </tr>
-    <tr>
-      <td>
-        <div class="d-flex align-items-center">
-          <img
-              src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-              class="rounded-circle"
-              alt=""
-              style="width: 45px; height: 45px"
-              />
-          <div class="ms-3">
-            <p class="fw-bold mb-1">Kate Hunington</p>
-            <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-          </div>
-        </div>
-      </td>
-      <td>
-        <p class="fw-normal mb-1">Designer</p>
-        <p class="text-muted mb-0">UI/UX</p>
-      </td>
-      <td>
-        <span class="badge badge-warning rounded-pill d-inline">Awaiting</span>
-      </td>
-      <td>Senior</td>
-      <td>
-        <button
-                type="button"
-                class="btn btn-link btn-rounded btn-sm fw-bold"
-                data-mdb-ripple-color="dark"
-                >
-          Edit
-        </button>
-      </td>
-    </tr>
+    <%}%>
   </tbody>
 </table>
     <script type="text/javascript" src="./js/mdb.min.js"></script>
